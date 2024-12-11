@@ -1,0 +1,94 @@
+
+.style {
+    font-family: "sans-serif", Serif;
+    align-content: center;
+    text-align: center;
+    color: darkblue;
+    width: auto;
+
+}
+.headline {
+
+    color: dodgerblue;
+    font-style: italic;
+}
+
+.tooltip {
+    visibility: hidden;
+    color: firebrick;
+    transition: opacity 0.5s, visibility 0.5s;
+    border-radius: 5px;
+    padding: 400px;
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1;
+    opacity: 0;
+}
+.tooltip.show {
+    visibility: visible;
+    opacity: 1;
+}
+
+.container {
+    border: 10px solid black;
+    background-image: url("picture.jpg");
+    background-size: cover;/*полное покрытие блока*/
+    background-repeat: no-repeat;
+    display: flex;
+    flex-direction: column; /* Выстраиваем блоки в колонку */
+    align-items: center; /* Горизонтальное выравнивание по центру */
+}
+.container.show {
+    background-image: url("red.jpg");
+}
+.block {
+     background: cornsilk;
+    text-align: center;
+    border: 1px solid black;
+    padding: 10px;
+    margin: 10px 0;
+
+}
+table {
+    width: 100%; /* Таблица растянута на всю ширину */
+    border-collapse: collapse; /* Убираем двойные линии между ячейками */
+}
+
+
+td {
+    background-color: #f2f2f2;
+    padding: 10px;
+    border: 1px solid #ddd; /* Границы для заголовков */
+    text-align: left; /* Выравнивание текста в заголовках */
+}
+
+
+tr {
+    padding: 10px;
+    border: 1px solid #ddd;
+}
+
+
+table {
+    margin: 20px 0; /* Отступы сверху и снизу */
+}
+
+/* Стили для чередования цветов строк (необязательно) */
+tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+button {
+    width: 30px;
+    height: 30px;
+    font-size: 16px;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+button.active {
+    background-color: orange;
+    color: white;
+}
