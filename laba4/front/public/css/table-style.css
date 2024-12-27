@@ -1,0 +1,29 @@
+.order-table {
+    border-collapse: collapse;
+    margin: 20px auto;
+    width: 80%;
+    text-align: center;
+}
+
+.order-table-header {
+    background: #E5E5E5;
+    border-bottom: 1px solid #BBBBBB;
+    padding: 16px;
+    font-weight: bold;
+}
+
+.order-table-odd-row {
+    background: #FFFFFF;
+    border-top: 1px solid #BBBBBB;
+    text-align: center;
+}
+
+.order-table-even-row {
+    background: #F9F9F9;
+    border-top: 1px solid #BBBBBB;
+    text-align: center;
+}
+
+th, td {
+    padding: 10px;
+}
