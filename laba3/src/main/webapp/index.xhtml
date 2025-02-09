@@ -7,5 +7,122 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui">
 
+<h:head>
+    <h:outputStylesheet name="index-style.css" library="css"/>
+
+    <h:outputStylesheet name="table-style.css" library="css"/>
+    <h:outputScript name="drawGraph.js" library="js"/>
+</h:head>
+<h:form id="formGraph">
+    <h:inputHidden id="x" value="#{dotBean.x}" />
+    <h:inputHidden id="y" value="#{dotBean.y}" />
+    <h:inputHidden id="r" value="#{dotBean.r}" />
+    <p:remoteCommand name="submitGraphData" process="formGraph" update="resultsTable resultsScriptPanel"
+                     actionListener="#{workDataBase.addResult(dotBean)}"/>
+</h:form>
+<h:body>
+    <f:view>
+        <p:outputPanel id="resultsScriptPanel" autoUpdate="true">
+            <h:outputScript escape="false">
+                var results = #{workDataBase.getResultsAsJson()};
+            </h:outputScript>
+        </p:outputPanel>
+
+        <span>
+            <canvas id="graph" width="400" height="400"></canvas>
+        </span>
+
+
+        <div>
+            <p:fieldset>
+                <h:form id="formSubmit">
+                    <h:panelGroup styleClass="panelGroupInline">
+                        <h:outputText value="X: "/>
+                        <p:spinner id="X_spinner" min="-5" max="5" value="#{dotBean.x}" stepFactor="0.1">
+
+                        </p:spinner>
+                    </h:panelGroup>
+
+                    <h:panelGroup styleClass="panelGroupInline">
+                        <h:outputText value="Y: "/>
+                        <h:inputText id="Y" value="#{dotBean.y}" converter="commaToDotDoubleConverter" >
+                            <f:validator validatorId="rangeValidator" />
+                            <p:ajax event="blur" execute="@this" update="YMessage" />
+                        </h:inputText>
+                    </h:panelGroup>
+                    <p:message id="YMessage" for="Y" closable="true" />
+
+
+                    <h:panelGroup styleClass="panelGroupInline">
+                        <h:outputText value="R: "/>
+                        <h:panelGroup id="linksGroup">
+                            <h:commandLink id="R1" styleClass="commandlink" onclick="setRValue(1)">
+                                <h:outputText value="1"/>
+                                <f:setPropertyActionListener target="#{dotBean.r}" value="1"/>
+                                <f:ajax execute="@this" render="@none" />
+                            </h:commandLink>
+
+                            <h:commandLink id="R2" styleClass="commandlink" onclick="setRValue(2)">
+                                <h:outputText value="2"/>
+                                <f:setPropertyActionListener target="#{dotBean.r}" value="2"/>
+                                <f:ajax execute="@this" render="@none" />
+                            </h:commandLink>
+                            <h:commandLink styleClass="commandlink" id="R3" onclick="setRValue(3)">
+                                <h:outputText value="3"/>
+                                <f:setPropertyActionListener target="#{dotBean.r}" value="3"/>
+                                <f:ajax execute="@this" render="@none" />
+                            </h:commandLink>
+
+                            <h:commandLink styleClass="commandlink" id="R4" onclick="setRValue(4)">
+                                <h:outputText value="4"/>
+                                <f:setPropertyActionListener target="#{dotBean.r}" value="4" />
+                                <f:ajax execute="@this" render="@none" />
+                            </h:commandLink>
+
+                            <h:commandLink styleClass="commandlink" id="R5" onclick="setRValue(5)">
+                                <h:outputText value="5"/>
+                                <f:setPropertyActionListener target="#{dotBean.r}" value="5"/>
+                                <f:ajax execute="@this" render="@none" />
+                            </h:commandLink>
+                        </h:panelGroup>
+                    </h:panelGroup>
+                    <p:commandButton id="Submit" value="Submit" process="@this X_spinner Y r"  update="resultsTable resultsScriptPanel"  oncomplete="draw_dot_after_submit()">
+                        <f:ajax execute="spinner Y" listener="#{workDataBase.addResult(dotBean)}"/>
+                    </p:commandButton>                </h:form>
+            </p:fieldset>
+        </div>
+        <br/>
+        <h:link id = "back" value="back" outcome="main" />
+        <h:dataTable id="resultsTable" value="#{workDataBase.getResults()}" var="o"
+                     styleClass="order-table"
+                     headerClass="order-table-header"
+                     rowClasses="order-table-odd-row,order-table-even-row"
+        >
+
+            <h:column>
+                <f:facet name="header">X</f:facet>
+                #{o.x}
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">Y</f:facet>
+                #{o.y}
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">R</f:facet>
+                #{o.r}
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">Hit?</f:facet>
+                #{o.hit}
+            </h:column>
+
+        </h:dataTable>
+
+
+    </f:view>
+</h:body>
 
 </html>
