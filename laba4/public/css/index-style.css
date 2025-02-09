@@ -1,0 +1,90 @@
+canvas {
+    border: 2px solid darkblue;
+    margin-bottom: 20px;
+}
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    background-color: #f4f4f9;
+    font-family: Arial, sans-serif;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+}
+
+#linksGroup {
+    display: flex;
+    gap: 10px;
+    margin: 10px 0;
+}
+
+#YMessage {
+    transition: opacity 1s ease-out;
+}
+
+.panelGroupInline {
+    display: inline-block;
+    margin-right: 30px;
+    margin-bottom: 20px;
+}
+
+.commandlink {
+    padding: 10px 15px;
+    background-color: #007bff;
+    color: white !important;
+    border: 1px solid #007bff;
+    text-align: center;
+    cursor: pointer;
+    text-decoration: none;
+    border-radius: 5px;
+    display: inline-block;
+}
+
+.commandlink:hover {
+    background-color: #0056b3;
+}
+
+.commandlink.active {
+    background-color: #ff5733;
+}
+
+/* Стили для p:commandButton */
+button.ui-commandbutton, input.ui-commandbutton {
+    padding: 10px 20px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button.ui-commandbutton:hover, input.ui-commandbutton:hover {
+    background-color: #218838;
+}
+
+
+
+#back {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    font-size: 16px;
+    color: darkblue;
+    text-decoration: none;
+    padding: 8px 12px;
+    border: 1px solid darkblue;
+    border-radius: 4px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+#back:hover {
+    background-color: darkblue;
+    color: white;
+}
