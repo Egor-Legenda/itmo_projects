@@ -1,0 +1,87 @@
+DROP TABLE IF EXISTS camps CASCADE;
+DROP TABLE IF EXISTS place CASCADE;
+DROP TABLE IF EXISTS human CASCADE;
+DROP TABLE IF EXISTS actions_human CASCADE;
+DROP TABLE IF EXISTS object CASCADE;
+DROP TABLE IF EXISTS description_object CASCADE;
+DROP TABLE IF EXISTS description_place CASCADE;
+DROP TABLE IF EXISTS specification CASCADE;
+DROP TABLE IF EXISTS location CASCADE;
+
+
+
+
+CREATE TABLE place(
+id SERIAL PRIMARY KEY,
+Name TEXT NOT NULL,
+Coordinates VARCHAR(100) NOT NULL,
+Residential BOOLEAN NOT NULL
+);
+
+CREATE TABLE camps(
+id SERIAL PRIMARY KEY,
+Name VARCHAR(100) NOT NULL,
+Size FLOAT NOT NULL,
+Adaptable_to_life BOOLEAN NOT NULL
+);
+
+CREATE TABLE human(
+id SERIAL PRIMARY KEY,
+Name TEXT NOT NULL,
+Gender TEXT NOT NULL,
+Age INTEGER NOT NULL
+);
+
+CREATE TABLE specification(
+id SERIAL PRIMARY KEY,
+Name TEXT NOT NULL
+);
+
+CREATE TABLE object(
+id SERIAL PRIMARY KEY,
+Name TEXT NOT NULL
+);
+
+CREATE TABLE description_place(
+id_Place BIGINT REFERENCES place (id) NOT NULL,
+id_Specifications BIGINT REFERENCES specification (id) NOT NULL,
+Planet TEXT NOT NULL,
+Country TEXT NOT NULL,
+Living_environment TEXT NOT NULL
+);
+
+CREATE TABLE actions_human(
+id_Object BIGINT REFERENCES object (id) NOT NULL,
+id_Human BIGINT REFERENCES human(id) NOT NULL,
+Action TEXT NOT NULL,
+Time_action TIME NOT NULL
+);
+
+CREATE TABLE description_object(
+id_Object BIGINT REFERENCES object (id) NOT NULL,
+id_Specifications BIGINT REFERENCES specification (id) NOT NULL,
+Size FLOAT NOT NULL,
+Able_to_live BOOLEAN NOT NULL,
+Sparkling BOOLEAN NOT NULL,
+Color TEXT NOT NULL
+);
+
+
+
+CREATE TABLE Location(
+id_Place BIGINT REFERENCES place (id) NOT NULL,
+id_Campus BIGINT REFERENCES camps (id),
+id_Human BIGINT REFERENCES human (id)
+);
+INSERT INTO place(Name, Coordinates, Residential) VALUES
+('Desrt', '43.121.123.230.212',FALSE);
+
+INSERT INTO camps(Name, Size, Adaptable_to_life) VALUES
+('Camp_1',100.0,TRUE);
+
+
+INSERT INTO human(Name, Gender, Age) VALUES
+('He','Man',18),
+('She','Woman',21);
+INSERT INTO location(ID_PLACE, ID_CAMPUS, ID_HUMAN) VALUES
+(1,1,1);
