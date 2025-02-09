@@ -1,21 +1,39 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { login } from '../redux/actions/authActions';
+import { useNavigate } from 'react-router-dom';
 
 const LoginForm = () => {
     const dispatch = useDispatch();
     const authState = useSelector(state => state.auth);
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const navigate = useNavigate();
+    const [showError, setShowError] = useState(false);
 
     const handleLogin = (e) => {
         e.preventDefault();
         dispatch(login(username, password));
     };
 
+    useEffect(() => {
+        if (authState.user) {
+            navigate('/home');
+        }
+    }, [authState.user, navigate]);
+
+    useEffect(() => {
+        if (authState.error) {
+            setShowError(true);
+            const timer = setTimeout(() => {
+                setShowError(false);
+            }, 3000);
+
+            return () => clearTimeout(timer);
+        }
+    }, [authState.error]);
     return (
         <div>
-            <h2>Login</h2>
             <form onSubmit={handleLogin}>
                 <input
                     type="text"
@@ -32,7 +50,7 @@ const LoginForm = () => {
                 <button type="submit">Login</button>
             </form>
 
-            {authState.error && <p>{authState.error}</p>}
+            {showError && <p className="error-popup">{authState.error}</p>}
         </div>
     );
 };

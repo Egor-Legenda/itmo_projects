@@ -1,10 +1,16 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-
 // Асинхронное получение точек пользователя
-export const fetchPoints = createAsyncThunk('points/fetchPoints', async () => {
-    const response = await fetch('/api/points/user', {
+
+export const fetchPoints = createAsyncThunk('points/fetchPoints', async (_, { getState }) => {
+    const state = getState();
+    const token = state.auth.token;
+
+    const response = await fetch('http://localhost:8080/laba3-1.0-SNAPSHOT/rest-server/points/user', {
         method: 'GET',
-        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
+        headers: { 'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
+        },
     });
     if (!response.ok) {
         throw new Error('Failed to fetch points');
@@ -12,10 +18,18 @@ export const fetchPoints = createAsyncThunk('points/fetchPoints', async () => {
     return await response.json();
 });
 
-const pointsSlice = createSlice({
+const pointsReducer = createSlice({
     name: 'points',
-    initialState: { points: [], loading: false, error: null },
-    reducers: {},
+    initialState: { points: [], r: 0, loading: false, error: null },
+    reducers: {
+        addPoint: (state, action) => {
+            state.points.push(action.payload);
+        },
+        setRadius: (state, action) => {
+            console.log("gg")
+            state.r = action.payload;
+        },
+    },
     extraReducers: (builder) => {
         builder
             .addCase(fetchPoints.pending, (state) => {
@@ -33,4 +47,7 @@ const pointsSlice = createSlice({
     },
 });
 
-export default pointsSlice.reducer;
+export const { addPoint, setRadius } = pointsReducer.actions;
+
+
+export default pointsReducer.reducer;

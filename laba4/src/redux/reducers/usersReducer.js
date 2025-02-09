@@ -1,10 +1,12 @@
+// usersReducer.js
+
 const initialState = {
     users: [],
     loading: false,
     error: null,
 };
 
-export const userReducer = (state = initialState, action) => {
+const usersReducer = (state = initialState, action) => {
     switch (action.type) {
         case 'FETCH_USERS_REQUEST':
             return { ...state, loading: true, error: null };
@@ -16,3 +18,6 @@ export const userReducer = (state = initialState, action) => {
             return state;
     }
 };
+
+export default usersReducer;
+

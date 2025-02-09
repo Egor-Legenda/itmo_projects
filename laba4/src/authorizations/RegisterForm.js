@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { register } from '../redux/actions/authActions';
 import { useNavigate } from 'react-router-dom';
@@ -9,17 +9,34 @@ const RegisterForm = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
+    const [showError, setShowError] = useState(false);
+
 
     const handleRegister = (e) => {
         e.preventDefault();
         dispatch(register(username, password));
+
     };
-    if (authState.user) {
-        navigate('../index.html');  // Переход на главную страницу, можно изменить на путь '/index.html', если нужно
-    }
+
+    useEffect(() => {
+        if (authState.user) {
+            navigate('/home');
+        }
+    }, [authState.user, navigate]);
+
+    useEffect(() => {
+        if (authState.error) {
+            setShowError(true);
+            const timer = setTimeout(() => {
+                setShowError(false);
+            }, 3000);
+
+            return () => clearTimeout(timer);
+        }
+    }, [authState.error]);
+
     return (
         <div>
-            <h2>Register</h2>
             <form onSubmit={handleRegister}>
                 <input
                     type="text"
@@ -36,7 +53,7 @@ const RegisterForm = () => {
                 <button type="submit">Register</button>
             </form>
 
-            {authState.error && <p>{authState.error}</p>}
+            {showError && <div className="error-popup">{authState.error}</div>}
         </div>
     );
 };

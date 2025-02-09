@@ -1,7 +1,7 @@
 // pointsSubmit.js
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { useDispatch } from 'react-redux';
-import {addPoint} from "../redux/reducers/pointsReducer";
+import {addPoint} from "./pointsReducer";
 
 // Асинхронное действие для отправки точки на сервер
 
@@ -42,7 +42,7 @@ const pointsSlice = createSlice({
     name: 'points',
     initialState: {
         points: [], // Хранилище точек
-        r: NaN, // Радиус
+        r: 0, // Радиус
         status: 'idle',
         error: null,
     },
@@ -50,13 +50,14 @@ const pointsSlice = createSlice({
         setRadius: (state, action) => {
             console.log('setRadius payload:', action.payload);
 
-            state.r = action.payload;
+            state.r.add(action.payload);
         },
     },
     extraReducers: (builder) => {
         builder
             .addCase(fetchPoints.fulfilled, (state, action) => {
                 state.points = action.payload; // Загружаем точки с сервера
+                state.points.unshift(action.payload);
             })
             .addCase(submitPoint.fulfilled, (state, action) => {
                 state.points.push(action.payload);
@@ -64,5 +65,5 @@ const pointsSlice = createSlice({
     },
 });
 
-export const { setRadius } = pointsSlice.actions;
+export const { setRadius, updatePoints } = pointsSlice.actions;
 export default pointsSlice.reducer;

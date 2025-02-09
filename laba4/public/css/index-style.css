@@ -1,3 +1,10 @@
+.parent-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
 canvas {
     border: 2px solid darkblue;
     margin-bottom: 20px;
@@ -88,3 +95,152 @@ button.ui-commandbutton:hover, input.ui-commandbutton:hover {
     background-color: darkblue;
     color: white;
 }
+
+
+
+
+.form-container {
+    border: 2px solid darkblue;
+    padding: 20px;
+    width: 400px;
+    margin: 20px auto;
+    border-radius: 10px;
+}
+
+h3, h4 {
+    font-family: Arial, sans-serif;
+    color: #333;
+}
+
+.radio-group {
+    justify-content: center; /* Центрирование радио-кнопок */
+    margin: 10px 0;
+}
+
+.radio-item {
+    margin: 0 10px; /* Добавляем отступы между элементами */
+}
+
+.circle {
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background-color: lightgray;
+    color: black;
+    font-weight: bold;
+    text-align: center;
+}
+
+.circle:hover {
+    background-color: #ccc; /* Легкое затемнение при наведении */
+    cursor: pointer;
+}
+
+.custom-button {
+    background-color: darkblue !important; /* Цвет кнопки */
+    transition: background-color 0.3s ease;
+}
+
+.custom-button:hover {
+    background-color: red !important; /* Цвет при наведении */
+}
+
+.custom-button:active {
+    background-color: red !important; /* Цвет при нажатии */
+}
+
+.text-field {
+    margin: 10px 0;
+    width: 100%;
+}
+
+.radio-group .MuiFormControlLabel-root {
+    margin-right: 10px;
+}
+
+
+
+.text-field {
+    width: 100%;
+    margin-top: 10px;
+}
+
+button {
+    margin-top: 20px;
+    background-color: #007BFF;
+    color: white;
+    font-size: 16px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+.error-message {
+    color: red;
+    font-size: 14px;
+}
+
+.success-message {
+    color: green;
+    font-size: 14px;
+}
+
+.error-popup {
+    position: fixed; /* Изменяем на fixed, чтобы позиционировать относительно окна */
+    top: 50%; /* Центрируем по вертикали */
+    left: 50%; /* Центрируем по горизонтали */
+    transform: translate(-50%, -50%); /* Сдвигаем центр по обеим осям */
+    background-color: rgba(255, 0, 0, 0.8);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    text-align: center;
+    animation: fadeInOut 2s ease-in-out;
+    z-index: 1000;
+}
+
+@keyframes fadeInOut {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, -60%); /* Легкое смещение вверх */
+    }
+    10%, 90% {
+        opacity: 1;
+        transform: translate(-50%, -50%);
+    }
+    100% {
+        opacity: 0;
+        transform: translate(-50%, -60%);
+    }
+}
+
+.logout-button {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: white; /* Белый фон по умолчанию */
+    color: darkblue; /* Темно-синий текст */
+    border: 2px solid darkblue; /* Темно-синяя рамка */
+    padding: 10px 20px; /* Отступы */
+    font-size: 16px; /* Размер шрифта */
+    border-radius: 5px; /* Скругление */
+    cursor: pointer; /* Указатель мыши */
+    transition: background-color 0.3s ease, color 0.3s ease; /* Плавный переход */
+}
+
+.logout-button:hover {
+    background-color: darkblue; /* Синий фон при наведении */
+    color: white; /* Белый текст при наведении */
+}
+
+
+

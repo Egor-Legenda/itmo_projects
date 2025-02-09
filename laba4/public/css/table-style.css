@@ -1,22 +1,29 @@
-.order-table{
-    border-collapse:collapse;
+.order-table {
+    border-collapse: collapse;
+    margin: 20px auto;
+    width: 80%;
+    text-align: center;
 }
 
-.order-table-header{
-    text-align:center;
-    background:none repeat scroll 0 0 #E5E5E5;
-    border-bottom:1px solid #BBBBBB;
-    padding:16px;
+.order-table-header {
+    background: #E5E5E5;
+    border-bottom: 1px solid #BBBBBB;
+    padding: 16px;
+    font-weight: bold;
 }
 
-.order-table-odd-row{
-    text-align:center;
-    background:none repeat scroll 0 0 #FFFFFFF;
-    border-top:1px solid #BBBBBB;
+.order-table-odd-row {
+    background: #FFFFFF;
+    border-top: 1px solid #BBBBBB;
+    text-align: center;
 }
 
-.order-table-even-row{
-    text-align:center;
-    background:none repeat scroll 0 0 #F9F9F9;
-    border-top:1px solid #BBBBBB;
+.order-table-even-row {
+    background: #F9F9F9;
+    border-top: 1px solid #BBBBBB;
+    text-align: center;
+}
+
+th, td {
+    padding: 10px;
 }
