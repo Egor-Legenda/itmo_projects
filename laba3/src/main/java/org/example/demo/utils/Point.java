@@ -1,46 +1,39 @@
 package org.example.demo.utils;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
-public class Dot {
+@Table(name = "points")
+public class Point {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "user_id", nullable = false)
+    private User author;
+    @Column(nullable = false)
+    private double r;
+
+    @Column(nullable = false)
+    private double x;
+
+    @Column(nullable = false)
+    private double y;
+
+    @Column(nullable = false)
     private boolean hit;
-    private String x;
-    private String y;
-    private String r;
-    private String author;
 
-    public Dot() {
-    }
 
-    public String getX() {
-        return x;
-    }
 
-    public void setX(String x) {
+    public Point() {}
+
+    public Point(User author, double x, double y, boolean hit) {
+        this.author = author;
         this.x = x;
-    }
-
-    public String getY() {
-        return y;
-    }
-
-    public void setY(String y) {
         this.y = y;
-    }
-
-    public String getR() {
-        return r;
-    }
-
-    public void setR(String r) {
-        this.r = r;
+        this.hit = hit;
     }
 
     public Long getId() {
@@ -51,6 +44,38 @@ public class Dot {
         this.id = id;
     }
 
+    public User getAuthor() {
+        return author;
+    }
+
+    public double getR() {
+        return r;
+    }
+
+    public void setR(double r) {
+        this.r = r;
+    }
+
+    public void setAuthor(User author) {
+        this.author = author;
+    }
+
+    public double getX() {
+        return x;
+    }
+
+    public void setX(double x) {
+        this.x = x;
+    }
+
+    public double getY() {
+        return y;
+    }
+
+    public void setY(double y) {
+        this.y = y;
+    }
+
     public boolean isHit() {
         return hit;
     }
@@ -59,11 +84,15 @@ public class Dot {
         this.hit = hit;
     }
 
-    public String getAuthor() {
-        return author;
-    }
-
-    public void setAuthor(String author) {
-        this.author = author;
+    @Override
+    public String toString() {
+        return "Point{" +
+                "id=" + id +
+                ", author=" + author +
+                ", r=" + r +
+                ", x=" + x +
+                ", y=" + y +
+                ", hit=" + hit +
+                '}';
     }
 }

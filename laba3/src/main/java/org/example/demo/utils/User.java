@@ -1,8 +1,7 @@
 package org.example.demo.utils;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-
-import javax.persistence.*;
 import java.util.Set;
 
 @Entity
@@ -19,16 +18,30 @@ public class User {
     @Column(nullable = false)
     private String passwordHash;
 
-    @OneToMany(mappedBy = "author", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<Point> points;  // Связь с точками (один пользователь - много точек)
+    @Column(nullable = false)
+    private boolean session;
 
-    // Конструкторы, геттеры и сеттеры
+
+
+    @OneToMany(mappedBy = "author", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JsonIgnore
+    private Set<Point> points;
+
+
 
     public User() {}
 
     public User(String username, String passwordHash) {
         this.username = username;
         this.passwordHash = passwordHash;
+    }
+
+    public boolean isSession() {
+        return session;
+    }
+
+    public void setSession(boolean session) {
+        this.session = session;
     }
 
     public Long getId() {
@@ -62,4 +75,5 @@ public class User {
     public void setPoints(Set<Point> points) {
         this.points = points;
     }
+
 }

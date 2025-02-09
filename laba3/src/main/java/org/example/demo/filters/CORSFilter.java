@@ -1,11 +1,11 @@
-package org.example.demo.config;
+package org.example.demo.filters;
 
 import java.io.IOException;
 
-import javax.ws.rs.container.ContainerRequestContext;
-import javax.ws.rs.container.ContainerResponseContext;
-import javax.ws.rs.container.ContainerResponseFilter;
-import javax.ws.rs.ext.Provider;
+import jakarta.ws.rs.container.ContainerRequestContext;
+import jakarta.ws.rs.container.ContainerResponseContext;
+import jakarta.ws.rs.container.ContainerResponseFilter;
+import jakarta.ws.rs.ext.Provider;
 
 @Provider
 public class CORSFilter implements ContainerResponseFilter {
@@ -21,5 +21,4 @@ public class CORSFilter implements ContainerResponseFilter {
         responseContext.getHeaders().add("Access-Control-Expose-Headers", "Set-Cookie");
 
     }
-
 }
